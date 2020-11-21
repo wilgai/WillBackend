@@ -1,0 +1,87 @@
+/***Configuracion.phph***/
+
+.config-module{
+background-color:#eee;
+background-image:-moz-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:-webkit-gradient(linear,left top,left bottom,from(#fafafa),to(#f8f8f8));
+background-image:-webkit-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:-ms-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:-o-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:linear-gradient(top,#fafafa,#f8f8f8);
+border:3px solid #0e7f7e;
+height:260px;
+margin-left: 10px;
+margin-top:10px;
+margin-bottom:10px;
+margin-right:10px;    
+padding:16px;
+position:relative;
+width:243px
+}
+
+.config_area_gasto{
+  background-color:#eee;
+background-image:-moz-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:-webkit-gradient(linear,left top,left bottom,from(#fafafa),to(#f8f8f8));
+background-image:-webkit-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:-ms-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:-o-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:linear-gradient(top,#fafafa,#f8f8f8);
+border:3px solid #0e7f7e;
+height:270px;
+margin-left: 10px;
+margin-top:5px;
+margin-bottom:10px;
+margin-right:10px;    
+padding:16px;
+position:relative;
+width:98%;
+}
+
+.config_area2{
+background-color:#eee;
+background-image:-moz-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:-webkit-gradient(linear,left top,left bottom,from(#fafafa),to(#f8f8f8));
+background-image:-webkit-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:-ms-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:-o-linear-gradient(top,#fafafa,#f8f8f8);
+background-image:linear-gradient(top,#fafafa,#f8f8f8);
+border:3px solid #0e7f7e;
+height:170px;
+margin-left: 10px;
+margin-top:5px;
+margin-bottom:10px;
+margin-right:10px;    
+padding:16px;
+position:relative;
+width:98%;
+}
+.area{
+	background-color:#FFFFFF;
+}
+
+.config-module h1 a{
+  color:#0f7f72;
+  text-decoration:
+}
+.config-module h1 a:hover{text-decoration:underline}
+.config-module p{color:#888}
+.config-module div{margin:8px 0}
+.config-module>a:last-child{
+	bottom:16px;
+	display:block;
+	position:absolute;
+	left:18px
+}
+
+.left-menu {
+	background-color:#eff2f4;
+}
+.top-header
+{
+	background-color:#B0C4DE;
+}
+
+.left-menu,ul,li,a{
+	color: black;
+}
