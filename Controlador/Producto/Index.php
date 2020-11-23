@@ -28,7 +28,7 @@ if($num > 0)
 {
     //Post array
     $productos_arr = array();
-    $productos_arr['data'] = array();
+    $productos_arr = array();
    
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
       extract($row);
@@ -40,23 +40,23 @@ if($num > 0)
          'fecha_registro'=>$fecha_registro,
          'fecha_actualizacion'=>$fecha_actualizacion,
          'tipo_impuesto'=>$tipo_impuesto,
-         'codigo_subcategoria'=>$codigo_subcategoria,
+         'codigo_categoria'=>$codigo_categoria,
          'referencia_interna'=>$referencia_interna,
          'estado'=>$estado,
          'referencia_suplidor'=>$referencia_suplidor,
          'foto'=>$foto,
          'oferta'=>$oferta,
-         'dirmodificar_precioeccion'=>$modificar_precio,
+         'modificar_precio'=>$modificar_precio,
          'acepta_descuento'=>$acepta_descuento,
          'detalle'=>$detalle,
          'codigo_marca'=>$codigo_marca,
          'porciento_beneficio'=>$porciento_beneficio,
          'porciento_minimo'=>$porciento_minimo,
          'modelo'=>$modelo,
-         'codigo'=>$Codigo,
+         'Codigo'=>$Codigo,
       );
       //Push to data
-      array_push($productos_arr['data'], $productos_item);
+      array_push($productos_arr, $productos_item);
     }
     //Turn to json
   echo json_encode($productos_arr);

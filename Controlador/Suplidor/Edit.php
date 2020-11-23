@@ -1,8 +1,8 @@
 <?php
 //Headers
 header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json,application/x-www-form-urlencoded');
-header('Access-Control-Allow-Methods:POST ');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods:PUT');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
@@ -17,40 +17,73 @@ $suplidor = new Suplidor($db);
 
 //Get raw posted data
 $data =json_decode(file_get_contents("php://input"));
+$suplidor->Id=$data->Id;
 $suplidor->nombre=$data->nombre;
 $suplidor->direccion=$data->direccion;
 $suplidor->rnc=$data->rnc;
 $suplidor->telefono=$data->telefono;
 $suplidor->correo=$data->correo;
 $suplidor->tipo=$data->tipo;
-$suplidor->foto=$data->foto;
+$suplidor->logo=$data->logo;
 $suplidor->web=$data->web;
 
-//Check if email is alredy exist
-$name=$suplidor->CheckName()->rowCount();
-$email=$suplidor->CheckEmail()->rowCount();
-$identification=$suplidor->CheckIdentification()->rowCount();
-if($email > 0)
+//Check if email is alredy exis
+
+$name=0;
+$email=0;
+$rnc=0;
+
+if($data->nombre !="" || $data->nombre !=null )
 {
-    echo "Este correo ya existe.";
+    $name=$suplidor->CheckName()->rowCount();
 }
-elseif($identification > 0)
+
+if($data->correo !="" || $data->correo !=null )
 {
-    echo "Este rnc ya existe.";
+    $email=$suplidor->CheckEmail()->rowCount();
 }
-elseif($name > 0)
+
+if($data->rnc !="" || $data->rnc !=null )
 {
-    echo "Este name ya existe.";
+    $rnc=$suplidor->CheckIdentification()->rowCount();
+}
+
+if($email > 1)
+{
+    echo json_encode(
+        'Este correo ya existe.'
+    );
+    
+}
+elseif($rnc > 1)
+{
+    echo json_encode(
+        'Este rnc ya existe.'
+    );
+    
+}
+elseif($name > 1)
+{
+    echo json_encode(
+        'Este name ya existe.'
+    );
+    
 }
 else 
 {
     // Create post
-    if($usuario->update()){
-        echo "Se actualizo el suplidor.";
+    if($suplidor->update()){
+        echo json_encode(
+            'Se actualizo el suplidor.'
+        );
+        
         
     }
     else{
-        echo "No se pudo actualizar el suplidor.";
+        echo json_encode(
+            'No se pudo actualizar el suplidor.'
+        );
+       
     }
 }
 

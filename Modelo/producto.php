@@ -4,6 +4,7 @@ class Producto{
     private $conn;
     private $table='producto';
     //Properties
+          public $Id;
           public $nombre;
           public $codigo_suplidor;
           public $usuario_registro;
@@ -11,7 +12,7 @@ class Producto{
           public $fecha_actualizacion;
           public $tipo_impuesto;
           public $estado;
-          public $codigo_subcategoria;
+          public $codigo_categoria;
           public $referencia_interna;
           public $referencia_suplidor;
           public $foto;
@@ -39,7 +40,7 @@ class Producto{
         fecha_actualizacion = :fecha_actualizacion,
         tipo_impuesto = :tipo_impuesto ,
         estado = :estado ,
-        codigo_subcategoria = :codigo_subcategoria,
+        codigo_categoria = :codigo_categoria,
         referencia_interna = :referencia_interna ,
         referencia_suplidor = :referencia_suplidor, 
         foto = :foto,
@@ -64,7 +65,7 @@ class Producto{
         $this->fecha_registro = htmlspecialchars(strip_tags($this->fecha_registro));
         $this->fecha_actualizacion = htmlspecialchars(strip_tags($this->fecha_actualizacion));
         $this->tipo_impuesto = htmlspecialchars(strip_tags($this->tipo_impuesto));
-        $this->codigo_subcategoria = htmlspecialchars(strip_tags($this->codigo_subcategoria));
+        $this->codigo_categoria = htmlspecialchars(strip_tags($this->codigo_categoria));
         $this->estado = htmlspecialchars(strip_tags($this->estado));
         $this->referencia_interna = htmlspecialchars(strip_tags($this->referencia_interna));
         $this->referencia_suplidor = htmlspecialchars(strip_tags($this->referencia_suplidor));
@@ -86,7 +87,7 @@ class Producto{
         $stmt->bindParam(':fecha_registro', $this->fecha_registro);
         $stmt->bindParam(':fecha_actualizacion', $this->fecha_actualizacion);
         $stmt->bindParam(':tipo_impuesto', $this->tipo_impuesto);
-        $stmt->bindParam(':codigo_subcategoria', $this->codigo_subcategoria);
+        $stmt->bindParam(':codigo_categoria', $this->codigo_categoria);
         $stmt->bindParam(':estado', $this->estado);
         $stmt->bindParam(':referencia_interna', $this->referencia_interna);
         $stmt->bindParam(':referencia_suplidor', $this->referencia_suplidor);
@@ -139,7 +140,7 @@ class Producto{
         $this->estado=$row['estado'];
         $this->tipo_impuesto=$row['tipo_impuesto'];
         $this->estado=$row['estado'];
-        $this->codigo_subcategoria=$row['codigo_subcategoria'];
+        $this->codigo_subcategoria=$row['codigo_categoria'];
         $this->referencia_interna=$row['referencia_interna'];
         $this->referencia_suplidor=$row['referencia_suplidor'];
         $this->foto=$row['foto'];
@@ -189,7 +190,7 @@ class Producto{
         fecha_actualizacion = :fecha_actualizacion,
         tipo_impuesto = :tipo_impuesto ,
         estado = :estado ,
-        codigo_subcategoria = :codigo_subcategoria,
+        codigo_categoria = :codigo_categoria,
         referencia_interna = :referencia_interna ,
         referencia_suplidor = :referencia_suplidor 
         foto = :foto,
@@ -210,7 +211,7 @@ class Producto{
         $this->fecha_registro = htmlspecialchars(strip_tags($this->fecha_registro));
         $this->fecha_actualizacion = htmlspecialchars(strip_tags($this->fecha_actualizacion));
         $this->tipo_impuesto = htmlspecialchars(strip_tags($this->tipo_impuesto));
-        $this->codigo_subcategoria = htmlspecialchars(strip_tags($this->codigo_subcategoria));
+        $this->codigo_categoria = htmlspecialchars(strip_tags($this->codigo_categoria));
         $this->estado = htmlspecialchars(strip_tags($this->estado));
         $this->referencia_interna = htmlspecialchars(strip_tags($this->referencia_interna));
         $this->referencia_suplidor = htmlspecialchars(strip_tags($this->referencia_suplidor));
@@ -232,7 +233,7 @@ class Producto{
         $stmt->bindParam(':fecha_registro', $this->fecha_registro);
         $stmt->bindParam(':fecha_actualizacion', $this->fecha_actualizacion);
         $stmt->bindParam(':tipo_impuesto', $this->tipo_impuesto);
-        $stmt->bindParam(':codigo_subcategoria', $this->codigo_subcategoria);
+        $stmt->bindParam(':codigo_categoria', $this->codigo_categoria);
         $stmt->bindParam(':contrasena', $this->contrasena);
         $stmt->bindParam(':estado', $this->estado);
         $stmt->bindParam(':referencia_interna', $this->referencia_interna);

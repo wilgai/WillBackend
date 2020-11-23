@@ -24,7 +24,7 @@ $producto->usuario_registro=$data->usuario_registro;
 $producto->fecha_registro=$data->fecha_registro;
 $producto->fecha_actualizacion=$data->fecha_actualizacion;
 $producto->tipo_impuesto=$data->tipo_impuesto;
-$producto->codigo_subcategoria=$data->codigo_subcategoria;
+$producto->codigo_categoria=$data->codigo_categoria;
 $producto->referencia_interna=$data->referencia_interna;
 $producto->referencia_suplidor=$data->referencia_suplidor;
 $producto->estado=$data->estado;
@@ -37,7 +37,7 @@ $producto->codigo_marca=$data->codigo_marca;
 $producto->porciento_beneficio=$data->porciento_beneficio;
 $producto->porciento_minimo=$data->porciento_minimo;
 $producto->modelo=$data->modelo;
-$producto->codigo=$data->codigo;
+$producto->codigo=$data->Codigo;
 
 //Check if email is alredy exist
 $name=$producto->CheckName()->rowCount();

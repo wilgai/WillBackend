@@ -1,11 +1,12 @@
 <?php
-class Categoria{
+class Modelo{
     //DB Properties
     private $conn;
-    private $table='categoria';
+    private $table='modelo';
     //Properties
     public $Id;
     public $nombre;
+    public $marca;
     
 
 
@@ -17,16 +18,20 @@ class Categoria{
     {
         $query='INSERT INTO '.$this->table .'
         SET 
-        nombre = :nombre';
+        nombre = :nombre,
+        marca = :marca';
+        
 
          //Prepare staement
         $stmt=$this->conn->prepare($query);
 
         //Clean Data
         $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+        $this->marca = htmlspecialchars(strip_tags($this->marca));
         //Bind Data
        
         $stmt->bindParam(':nombre', $this->nombre);
+        $stmt->bindParam(':marca', $this->marca);
         //Execute query
         if($stmt->execute())
         {
@@ -68,7 +73,7 @@ class Categoria{
         //Prepare statement
         $stmt=$this->conn->prepare($query);
         //Bind param
-        $stmt->bindParam(1, $this->identificacion);
+        $stmt->bindParam(1, $this->nombre);
         //Execute Statement
         $stmt->execute();
         return $stmt;
@@ -78,17 +83,18 @@ class Categoria{
     {
         $query=' UPDATE '.$this->table .'
         SET 
-        nombre = :nombre 
-        WHERE 
-        Id= :Id';
+        nombre = :nombre ,
+        marca =: marca
+        WHERE
+        Id= Id';
         $stmt=$this->conn->prepare($query);
         //Clean Data
         //Clean Data
         $this->nombre = htmlspecialchars(strip_tags($this->nombre));
-        $this->Id = htmlspecialchars(strip_tags($this->Id));
+        $this->marca = htmlspecialchars(strip_tags($this->marca));
         //Bind Data
         $stmt->bindParam(':nombre', $this->nombre);
-        $stmt->bindParam(':Id', $this->Id);
+        $stmt->bindParam(':marca', $this->marca);
         //Execute query
         $stmt->execute();
         if($stmt->execute()){

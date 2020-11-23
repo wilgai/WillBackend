@@ -28,7 +28,7 @@ if($num > 0)
 {
     //Post array
     $cat_arr = array();
-    $cat_arr['data'] = array();
+    $cat_arr= array();
    
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
       extract($row);
@@ -40,7 +40,7 @@ if($num > 0)
          
       );
       //Push to data
-      array_push($cat_arr['data'], $cat_item);
+      array_push($cat_arr, $cat_item);
     }
     //Turn to json
   echo json_encode($cat_arr);

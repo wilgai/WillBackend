@@ -19,19 +19,29 @@ $data =json_decode(file_get_contents("php://input"));
 $marca->nombre=$data->nombre;
 //Check if email is alredy exist
 $nombre=$marca->CheckName()->rowCount();
-if($nombre > 0)
+if($nombre > 1)
 {
-    echo "Esta categoria ya existe.";
+    
+    echo json_encode(
+        array('message'=>'Esta marca ya existe.')
+    );
+    
 }
 else 
 {
     // Create post
     if($marca->update()){
-        echo "Se actualizo la marca.";
+        echo json_encode(
+            array('message'=>'Se actualizo la marca.')
+        );
+       
         
     }
     else{
-        echo "No se pudo actualizar la marca.";
+        
+        echo json_encode(
+            array('message'=>'No se pudo actualizar la marca.')
+        );
     }
 }
 

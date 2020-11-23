@@ -146,9 +146,12 @@ class Suplidor{
         correo = :correo,
         web = :web ,
         tipo = :tipo,
-        logo = :logo ';
+        logo = :logo 
+        WHERE
+        Id = :Id';
         $stmt=$this->conn->prepare($query);
        //Clean Data
+       $this->Id = htmlspecialchars(strip_tags($this->Id));
        $this->nombre = htmlspecialchars(strip_tags($this->nombre));
        $this->rnc = htmlspecialchars(strip_tags($this->rnc));
        $this->direccion = htmlspecialchars(strip_tags($this->direccion));
@@ -158,6 +161,7 @@ class Suplidor{
        $this->tipo = htmlspecialchars(strip_tags($this->tipo));
        $this->logo = htmlspecialchars(strip_tags($this->logo));
        //Bind Data
+       $stmt->bindParam(':Id', $this->Id);
        $stmt->bindParam(':nombre', $this->nombre);
        $stmt->bindParam(':rnc', $this->rnc);
        $stmt->bindParam(':direccion', $this->direccion);

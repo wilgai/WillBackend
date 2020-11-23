@@ -21,17 +21,26 @@ $marca->nombre=$data->nombre;
 $nombre=$marca->CheckName()->rowCount();
 if($nombre > 0)
 {
-    echo "Esta marca ya existe.";
+
+    echo json_encode(
+        array('message'=>'Esta marca ya existe.')
+    );
 }
 else 
 {
     // Create post
     if($usuario->create()){
-        echo "Se creo la marca.";
+        
+        echo json_encode(
+            array('message'=>'Se creo la marca.')
+        );
         
     }
     else{
-        echo "No se pudo crear la marca.";
+        
+        echo json_encode(
+            array('message'=>'No se pudo crear la marca.')
+        );
     }
 }
 

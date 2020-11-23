@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../config/Database.php';
-include_once '../../Modelo/marca.php';
+include_once '../../Modelo/modelo.php';
 
 //Instancaite DB & connect
 
@@ -13,11 +13,11 @@ $db =$database->connect();
 
 //Instanciate blog post object
 
-$marca = new Marca($db);
+$modelo = new Modelo($db);
 
 //Blog post query
 
-$result = $marca->read();
+$result = $modelo->read();
 //Get count row
 
 $num =$result->rowCount();
@@ -35,6 +35,7 @@ if($num > 0)
       $marca_item = array(
          'Id'=>$Id,
          'nombre'=>$nombre,
+         'marca'=>$marca
          
          
          
@@ -47,7 +48,7 @@ if($num > 0)
 }
 else{
     echo json_encode(
-        array('message'=>'No se ha encontrado ninguna marca')
+        array('message'=>'No se ha encontrado ninguna modelo')
     );
 
 }

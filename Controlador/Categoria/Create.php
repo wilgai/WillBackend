@@ -19,20 +19,27 @@ $data =json_decode(file_get_contents("php://input"));
 $cat->nombre=$data->nombre;
 //Check if email is alredy exist
 $nombre=$cat->CheckName()->rowCount();
-$identification=$usuario->CheckIdentification()->rowCount();
+
 if($nombre > 0)
 {
-    echo "Esta categoria ya existe.";
+    echo json_encode(
+        array('message'=>'Esta categoria ya existe.')
+    );
 }
 else 
 {
     // Create post
-    if($usuario->create()){
-        echo "Se creo la categoria.";
+    if($cat->create()){
+        echo json_encode(
+            array('message'=>'Se creo la categoria.')
+        );
         
     }
     else{
-        echo "No se pudo crear la categoria.";
+        
+        echo json_encode(
+            array('message'=>'No se pudo crear la categoria.')
+        );
     }
 }
 
