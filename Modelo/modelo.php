@@ -51,6 +51,15 @@ class Modelo{
         return $stmt;
     }
 
+    public function modeloByMarca(){
+        $query= ' SELECT *FROM '.$this->table . ' WHERE marca=? ';
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->marca);
+        //Execute query
+        $stmt->execute();
+        return $stmt;
+    }
+
     public function read_single()
     {
         $query= ' SELECT *FROM '.$this->table . ' WHERE Id=? ';
@@ -83,16 +92,18 @@ class Modelo{
     {
         $query=' UPDATE '.$this->table .'
         SET 
-        nombre = :nombre ,
-        marca =: marca
+        nombre =:nombre ,
+        marca =:marca
         WHERE
-        Id= Id';
+        Id =:Id';
         $stmt=$this->conn->prepare($query);
         //Clean Data
         //Clean Data
+        $this->Id = htmlspecialchars(strip_tags($this->Id));
         $this->nombre = htmlspecialchars(strip_tags($this->nombre));
         $this->marca = htmlspecialchars(strip_tags($this->marca));
         //Bind Data
+        $stmt->bindParam(':Id', $this->Id);
         $stmt->bindParam(':nombre', $this->nombre);
         $stmt->bindParam(':marca', $this->marca);
         //Execute query

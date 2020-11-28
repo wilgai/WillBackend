@@ -29,7 +29,7 @@ if($nombre > 0)
 else 
 {
     // Create post
-    if($usuario->create()){
+    if($marca->create()){
         
         echo json_encode(
             array('message'=>'Se creo la marca.')

@@ -17,6 +17,7 @@ $marca = new Marca($db);
 //Get raw posted data
 $data =json_decode(file_get_contents("php://input"));
 $marca->nombre=$data->nombre;
+$marca->Id=$data->Id;
 //Check if email is alredy exist
 $nombre=$marca->CheckName()->rowCount();
 if($nombre > 1)

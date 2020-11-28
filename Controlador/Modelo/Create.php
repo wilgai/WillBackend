@@ -19,7 +19,7 @@ $data =json_decode(file_get_contents("php://input"));
 $modelo->nombre=$data->nombre;
 $modelo->marca=$data->marca;
 //Check if email is alredy exist
-$nombre=$marca->CheckName()->rowCount();
+$nombre=$modelo->CheckName()->rowCount();
 if($nombre > 0)
 {
 

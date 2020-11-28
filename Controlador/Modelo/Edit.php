@@ -16,9 +16,9 @@ $db =$database->connect();
 $modelo = new Modelo($db);
 //Get raw posted data
 $data =json_decode(file_get_contents("php://input"));
-$marca->Id=$data->Id;
-$marca->nombre=$data->nombre;
-$marca->marca=$data->marca;
+$modelo->Id=$data->Id;
+$modelo->nombre=$data->nombre;
+$modelo->marca=$data->marca;
 //Check if email is alredy exist
 $nombre=$modelo->CheckName()->rowCount();
 if($nombre > 1)

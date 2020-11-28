@@ -64,11 +64,11 @@ class Marca{
 
     public  function CheckName()
     {
-        $query= ' SELECT *FROM '.$this->table . ' WHERE Name=? ';
+        $query= ' SELECT *FROM '.$this->table . ' WHERE nombre=? ';
         //Prepare statement
         $stmt=$this->conn->prepare($query);
         //Bind param
-        $stmt->bindParam(1, $this->identificacion);
+        $stmt->bindParam(1, $this->nombre);
         //Execute Statement
         $stmt->execute();
         return $stmt;
@@ -78,12 +78,17 @@ class Marca{
     {
         $query=' UPDATE '.$this->table .'
         SET 
-        nombre = :nombre ';
+        nombre = :nombre 
+        WHERE
+        Id = :Id';
         $stmt=$this->conn->prepare($query);
         //Clean Data
         //Clean Data
+        $this->Id = htmlspecialchars(strip_tags($this->Id));
         $this->nombre = htmlspecialchars(strip_tags($this->nombre));
+
         //Bind Data
+        $stmt->bindParam(':Id', $this->Id);
         $stmt->bindParam(':nombre', $this->nombre);
         //Execute query
         $stmt->execute();
