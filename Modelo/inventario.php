@@ -17,7 +17,8 @@ class Inventario{
         $this->conn=$db;
     }
     public function read(){
-        $query='SELECT p.Id, 
+        $query='SELECT
+         p.Id, 
         p.nombre, 
         p.codigo_suplidor, 
         p.usuario_registro, 
@@ -41,23 +42,38 @@ class Inventario{
          i.PrecioCompra, 
          i.Ganancia, 
          i.PrecioVenta, 
-         i.Descuento, 
-         i.PorcientoDescuento, 
+         i.Itbis, 
          i.Cantidad, 
-         i.Fecha 
+         i.Fecha,
+         i.ref
          FROM producto p 
          INNER JOIN 
          inventario i 
          ON 
          p.Id = i.IdProducto 
-         WHERE i.Cantidad > 0 
-         AND p.estado=1 ';
+         WHERE 
+          p.estado=1 ';
         //Prepare statement
         $stmt=$this->conn->prepare($query);
         //Execute query
         $stmt->execute();
         return $stmt;
     }
+
+    public function CheckInventory(){
+        $query=' SELECT
+         *FROM 
+         inventario 
+         WHERE 
+          Id=? ';
+        //Prepare statement
+        $stmt=$this->conn->prepare($query);
+        $stmt->bindParam(1, $this->Id);
+        //Execute query
+        $stmt->execute();
+        return $stmt;
+    }
+    
         
     
     

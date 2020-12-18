@@ -6,6 +6,7 @@ header('Content-Type: application/json');
 include_once '../../config/Database.php';
 include_once '../../Modelo/producto.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -46,6 +47,7 @@ $usuario_arr=array(
          'porciento_minimo'=>$producto->porciento_minimo,
          'modelo'=>$producto->modelo,
          'Codigo'=>$producto->codigo,
+         'garantia'=>$garantia
 );
 
 //Make Json

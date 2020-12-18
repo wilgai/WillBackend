@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/modelo.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -23,25 +24,19 @@ $nombre=$modelo->CheckName()->rowCount();
 if($nombre > 0)
 {
 
-    echo json_encode(
-        array('message'=>'Este modelo ya existe.')
-    );
+    echo json_encode(10);
 }
 else 
 {
     // Create post
     if($modelo->create()){
         
-        echo json_encode(
-            array('message'=>'Se creo el modelo.')
-        );
+        echo json_encode(1);
         
     }
     else{
         
-        echo json_encode(
-            array('message'=>'No se pudo crear el modelo.')
-        );
+        echo json_encode(0);
     }
 }
 

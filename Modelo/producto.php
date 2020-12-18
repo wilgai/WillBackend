@@ -25,6 +25,7 @@ class Producto{
           public $porciento_minimo;
           public $modelo;
           public $codigo;
+          public $garantia;
     public function __construct($db){
         $this->conn=$db;
     }
@@ -52,7 +53,8 @@ class Producto{
         porciento_beneficio = :porciento_beneficio ,
         porciento_minimo = :porciento_minimo,
         modelo = :modelo,
-        codigo = :codigo ';
+        codigo = :codigo,
+        garantia = :garantia ';
 
 
          //Prepare staement
@@ -79,6 +81,7 @@ class Producto{
         $this->porciento_minimo = htmlspecialchars(strip_tags($this->porciento_minimo));
         $this->modelo = htmlspecialchars(strip_tags($this->modelo));
         $this->codigo = htmlspecialchars(strip_tags($this->codigo));
+        $this->garantia = htmlspecialchars(strip_tags($this->garantia));
         //Bind Data
        
         $stmt->bindParam(':nombre', $this->nombre);
@@ -101,6 +104,8 @@ class Producto{
         $stmt->bindParam(':porciento_minimo', $this->porciento_minimo);
         $stmt->bindParam(':modelo', $this->modelo);
         $stmt->bindParam(':codigo', $this->codigo);
+        $stmt->bindParam(':garantia', $this->garantia);
+
         //Execute query
         if($stmt->execute())
         {
@@ -112,7 +117,54 @@ class Producto{
 
     public function read()
     {
-        $query=' SELECT *FROM '.$this->table;
+        $query=' 
+                SELECT
+                p.Id,
+                p.nombre,
+                p.codigo_suplidor,
+                p.usuario_registro,
+                p.fecha_registro,
+                p.fecha_actualizacion,
+                p.tipo_impuesto,
+                p.estado,
+                p.codigo_categoria,
+                p.referencia_interna,
+                p.referencia_suplidor,
+                p.foto,
+                p.oferta,
+                p.modificar_precio,
+                p.acepta_descuento,
+                p.detalle,
+                p.codigo_marca,
+                p.porciento_beneficio,
+                p.porciento_minimo,
+                p.modelo ,
+                p.Codigo,
+                p.garantia,
+                s.nombre AS nombreSuplidor,
+                mo.nombre AS nombreModelo,
+                c.nombre as nombreCategoria,
+                m.nombre as nombreMarca
+                FROM 
+                producto p
+                INNER JOIN
+                suplidor s
+                ON
+                p.codigo_suplidor=s.Id
+                INNER JOIN 
+                marca m
+                ON
+                p.codigo_marca =m.Id
+                INNER JOIN 
+                modelo mo
+                ON 
+                p.modelo= mo.Id
+                INNER JOIN 
+                categoria c
+                ON
+                p.codigo_categoria=c.Id
+                WHERE p.estado=1
+                        ';
         //Prepare statement
         $stmt=$this->conn->prepare($query);
         //Execute query
@@ -195,6 +247,7 @@ class Producto{
         $this->porciento_minimo=$row['porciento_minimo'];
         $this->modelo=$row['modelo'];
         $this->codigo=$row['Codigo'];
+        $this->codigo=$row['garantia'];
     }
 
     public  function CheckName()
@@ -223,7 +276,7 @@ class Producto{
 
     public function update()
     {
-        $query=' UPDATE '.$this->table .'
+        $query='UPDATE '.$this->table .'
         SET 
         nombre = :nombre,
         codigo_suplidor = :codigo_suplidor,
@@ -234,7 +287,7 @@ class Producto{
         estado = :estado ,
         codigo_categoria = :codigo_categoria,
         referencia_interna = :referencia_interna ,
-        referencia_suplidor = :referencia_suplidor 
+        referencia_suplidor = :referencia_suplidor, 
         foto = :foto,
         oferta = :oferta,
         modificar_precio = :modificar_precio,
@@ -244,9 +297,16 @@ class Producto{
         porciento_beneficio = :porciento_beneficio ,
         porciento_minimo = :porciento_minimo,
         modelo = :modelo,
-        codigo = :codigo ';
+        codigo = :codigo,
+        garantia = :garantia 
+        WHERE
+        Id = :Id ';
+
+
+         //Prepare staement
         $stmt=$this->conn->prepare($query);
         //Clean Data
+        $this->Id = htmlspecialchars(strip_tags($this->Id));
         $this->nombre = htmlspecialchars(strip_tags($this->nombre));
         $this->codigo_suplidor = htmlspecialchars(strip_tags($this->codigo_suplidor));
         $this->usuario_registro = htmlspecialchars(strip_tags($this->usuario_registro));
@@ -267,8 +327,9 @@ class Producto{
         $this->porciento_minimo = htmlspecialchars(strip_tags($this->porciento_minimo));
         $this->modelo = htmlspecialchars(strip_tags($this->modelo));
         $this->codigo = htmlspecialchars(strip_tags($this->codigo));
+        $this->garantia = htmlspecialchars(strip_tags($this->garantia));
         //Bind Data
-       
+        $stmt->bindParam(':Id', $this->Id);
         $stmt->bindParam(':nombre', $this->nombre);
         $stmt->bindParam(':codigo_suplidor', $this->codigo_suplidor);
         $stmt->bindParam(':usuario_registro', $this->usuario_registro);
@@ -276,7 +337,6 @@ class Producto{
         $stmt->bindParam(':fecha_actualizacion', $this->fecha_actualizacion);
         $stmt->bindParam(':tipo_impuesto', $this->tipo_impuesto);
         $stmt->bindParam(':codigo_categoria', $this->codigo_categoria);
-        $stmt->bindParam(':contrasena', $this->contrasena);
         $stmt->bindParam(':estado', $this->estado);
         $stmt->bindParam(':referencia_interna', $this->referencia_interna);
         $stmt->bindParam(':referencia_suplidor', $this->referencia_suplidor);
@@ -290,14 +350,15 @@ class Producto{
         $stmt->bindParam(':porciento_minimo', $this->porciento_minimo);
         $stmt->bindParam(':modelo', $this->modelo);
         $stmt->bindParam(':codigo', $this->codigo);
+        $stmt->bindParam(':garantia', $this->garantia);
         //Execute query
-        $stmt->execute();
-        if($stmt->execute()){
+        if($stmt->execute())
+        {
             return true;
         }
-        //Print error if something goes wrong
-        printf("Error: %s.\n", $stmt->error);
-       return false;
+        printf("Error: %s.\n",$stmt->error);
+        return false;
+       
     }
     public function delete()
     {
@@ -313,6 +374,7 @@ class Producto{
         //Execute query
         if($stmt->execute()){
             return true;
+            printf("Error: %s.\n", $stmt);
         }
         //Print error if something goes wrong
         printf("Error: %s.\n", $stmt->error);

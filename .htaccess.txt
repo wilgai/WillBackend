@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+CGIPassAuth On

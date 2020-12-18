@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/producto.php';
 
+
 //Instancaite DB & connect
 $database =new Database();
 $db =$database->connect();
@@ -19,13 +20,8 @@ $producto->Id=$data->Id;
 //$usuario->id=$_GET['id'];
 // Create post
 if($producto->delete()){
-    echo json_encode(
-        array('message' => 'Se elimino el producto')
-        
-    );
+    echo json_encode(1);
 }
 else{
-    echo json_encode(
-        array('message' => 'No se pudo eliminar el producto')
-    );
+    echo json_encode(0);
 }

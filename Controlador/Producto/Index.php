@@ -1,10 +1,13 @@
 <?php
 //Headers
+session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../config/Database.php';
 include_once '../../Modelo/producto.php';
+
+
 
 //Instancaite DB & connect
 
@@ -54,6 +57,12 @@ if($num > 0)
          'porciento_minimo'=>$porciento_minimo,
          'modelo'=>$modelo,
          'Codigo'=>$Codigo,
+         'nombreCategoria'=>$nombreCategoria,
+         'nombreMarca'=>$nombreMarca,
+         'nombreSuplidor'=>$nombreSuplidor,
+         'nombreModelo'=>$nombreModelo,
+         'garantia'=>$garantia
+
       );
       //Push to data
       array_push($productos_arr, $productos_item);

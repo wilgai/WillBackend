@@ -9,6 +9,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/usuario.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -35,35 +36,33 @@ $usuario->sexo=$data->sexo;
 if($_SERVER['REQUEST_METHOD'] != "OPTIONS")
 {
     $email=$usuario->CheckEmail()->rowCount();
+    $userName=$usuario->CheckUserName()->rowCount();
     $identification=$usuario->CheckIdentification()->rowCount();
     if($email > 0)
     {
-        echo json_encode(
-            'Este correo ya existe.'
-        );
+        echo json_encode(10);
         
     }
     elseif($identification > 0)
     {
-        echo json_encode(
-            'Este documento ya existe.'
-        );
+        echo json_encode(20);
+       
+    }
+    elseif($userName > 0)
+    {
+        echo json_encode(30);
        
     }
     else 
     {
         // Create post
         if($usuario->create()){
-            echo json_encode(
-                'Se registro el usuario, por favor verifique su correo para confimar la cuenta.'
-            );
+            echo json_encode(true);
             
             
         }
         else{
-            echo json_encode(
-                'No se pudo crear el usuario.'
-            );
+            echo json_encode(false);
             
         }
     }

@@ -6,6 +6,7 @@ header('Content-Type: application/json');
 include_once '../../config/Database.php';
 include_once '../../Modelo/inventario.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -59,10 +60,10 @@ if($num > 0)
           'PrecioCompra'=>$PrecioCompra,
           'Ganancia'=>$Ganancia,
           'PrecioVenta'=>$PrecioVenta,
-          'Descuento'=>$Descuento,
-          'PorcientoDescuento'=>$PorcientoDescuento,
+          'Itbis'=>$Itbis,
           'Cantidad'=>$Cantidad,
-          'Fecha'=>$Fecha
+          'Fecha'=>$Fecha,
+          'ref'=>$ref
       );
       //Push to data
       array_push($inventarios_arr, $inventarios_item);

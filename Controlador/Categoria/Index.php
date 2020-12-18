@@ -1,25 +1,21 @@
 <?php
 //Headers
+require('../../vendor/autoload.php');
+use \Firebase\JWT\JWT;
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-
 include_once '../../config/Database.php';
 include_once '../../Modelo/categoria.php';
-
 //Instancaite DB & connect
-
 $database =new Database();
 $db =$database->connect();
-
 //Instanciate blog post object
-
 $cat = new Categoria($db);
-
-//Blog post query
-
-$result = $cat->read();
+//Checking authentification
+  try {
+    
+    $result = $cat->read();
 //Get count row
-
 $num =$result->rowCount();
 
 //Check if any posts
@@ -34,10 +30,7 @@ if($num > 0)
       extract($row);
       $cat_item = array(
          'Id'=>$Id,
-         'nombre'=>$nombre,
-         
-         
-         
+         'nombre'=>$nombre,   
       );
       //Push to data
       array_push($cat_arr, $cat_item);
@@ -51,3 +44,16 @@ else{
     );
 
 }
+  } 
+  catch (Exception $ex)
+  {
+    http_response_code(500);
+    echo json_encode(array(
+      "status"=>404,
+      "message"=>$ex->getMessage()
+    ));
+  }
+  
+
+
+

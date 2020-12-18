@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/suplidor.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -48,38 +49,28 @@ if($data->rnc !="" || $data->rnc !=null )
 
 if($email > 0)
 {
-    echo json_encode(
-        'Este correo ya existe.'
-    );
+    echo json_encode(20);
 }
 elseif($rnc > 0)
 {
-    echo json_encode(
-        'Este rnc ya existe.'
-    );
+    echo json_encode(30);
     
 }
 elseif($name > 0)
 {
-    echo json_encode(
-        'Este nombre ya existe.'
-    );
+    echo json_encode(10);
     
 }
 else 
 {
     // Create post
     if($suplidor->create()){
-        echo json_encode(
-            'Se registro el suplidor.'
-        );
+        echo json_encode(1);
        
         
     }
     else{
-        echo json_encode(
-            'No se pudo crear el suplidor.'
-        );
+        echo json_encode(0);
         
     }
 }

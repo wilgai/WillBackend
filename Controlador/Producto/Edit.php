@@ -4,10 +4,8 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods:POST ');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
-
 include_once '../../config/Database.php';
 include_once '../../Modelo/producto.php';
-
 //Instancaite DB & connect
 $database =new Database();
 $db =$database->connect();
@@ -15,6 +13,7 @@ $db =$database->connect();
 $producto = new Producto($db);
 //Get raw posted data
 $data =json_decode(file_get_contents("php://input"));
+$producto->Id=$data->Id;
 $producto->nombre=$data->nombre;
 $producto->codigo_suplidor=$data->codigo_suplidor;
 $producto->usuario_registro=$data->usuario_registro;
@@ -34,36 +33,25 @@ $producto->codigo_marca=$data->codigo_marca;
 $producto->porciento_beneficio=$data->porciento_beneficio;
 $producto->porciento_minimo=$data->porciento_minimo;
 $producto->modelo=$data->modelo;
-$producto->codigo=$data->codigo;
+$producto->codigo=$data->Codigo;
+$producto->garantia=$data->garantia;
 
 //Check if email is alredy exist
 $name=$producto->CheckName()->rowCount();
-$code=$producto->CheckCode()->rowCount();
-if($name > 0)
+if($name > 1)
 {
-    echo json_encode(
-        array('message' => 'Existe un producto con este nombre')
-    );
-}
-elseif($code > 0)
-{
-    echo json_encode(
-        array('message' => 'Este producto ya existe')
-    );
+    echo json_encode(10);
 }
 else 
 {
+    echo $producto->update();
     // Create post
-    if($producto->update()){
-        echo json_encode(
-            array('message' => 'Se registro el producto')
-        );
+    /*if($producto->update()){
+        echo json_encode(1);
     }
     else{
-        echo json_encode(
-            array('message' => 'No se pudo registrar el producto')
-        );
-    }
+        echo json_encode(0);
+    }*/
 }
 
 

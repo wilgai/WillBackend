@@ -25,20 +25,7 @@ class Login
         //Execute Statement
 		$stmt->execute();
 		return $stmt;
-        //$row=$stmt->fetch(PDO::FETCH_ASSOC);
-        //Set properties
-        /*$this->id=$row['Id'];
-        $this->nombre=$row['nombre'];
-        $this->direccion=$row['direccion'];
-        $this->identificacion=$row['identificacion'];
-        $this->telefono=$row['telefono'];
-        $this->correo=$row['correo'];
-        $this->usuario=$row['usuario'];
-        $this->tipo_usuario=$row['tipo_usuario'];
-        $this->contrasena=$row['contrasena'];
-        $this->tipo_usuario=$row['tipo_usuario'];
-        $this->estado=$row['estado'];
-        $this->sexo=$row['sexo'];*/
+      
 	}
 	
 

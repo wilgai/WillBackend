@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/marca.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -23,26 +24,20 @@ $nombre=$marca->CheckName()->rowCount();
 if($nombre > 1)
 {
     
-    echo json_encode(
-        array('message'=>'Esta marca ya existe.')
-    );
+    echo json_encode(10);
     
 }
 else 
 {
     // Create post
     if($marca->update()){
-        echo json_encode(
-            array('message'=>'Se actualizo la marca.')
-        );
+        echo json_encode(1);
        
         
     }
     else{
         
-        echo json_encode(
-            array('message'=>'No se pudo actualizar la marca.')
-        );
+        echo json_encode(0);
     }
 }
 

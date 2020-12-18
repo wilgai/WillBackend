@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/usuario.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -29,33 +30,14 @@ $usuario->estado=null;
 $usuario->sexo=$data->sexo;
 
 //Check if email is alredy exist
-$email=$usuario->CheckEmail()->rowCount();
-$identification=$usuario->CheckIdentification()->rowCount();
-if($email > 1)
-{
-    echo json_encode(
-         'Este correo ya existe'
-    );
-}
-elseif($identification > 1)
-{
-    echo json_encode(
-        'Este documento existe'
-    );
-}
-else 
-{
+
     // Create post
     if($usuario->lockUser()){
-        echo json_encode(
-             'Se desactivo el usuario'
-        );
+        echo json_encode(1);
     }
     else{
-        echo json_encode(
-             'No se pudo desactivar el usario'
-        );
+        echo json_encode(0);
     }
-}
+
 
 

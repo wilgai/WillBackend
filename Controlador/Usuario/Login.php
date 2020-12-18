@@ -1,10 +1,14 @@
 <?php
+
+require('../../vendor/autoload.php');
+use \Firebase\JWT\JWT;
 //Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../config/Database.php';
 include_once '../../Modelo/login.php';
+
 
 //Instancaite DB & connect
 
@@ -16,43 +20,58 @@ $db =$database->connect();
 $usuario = new Login($db);
 
 //Get ID
-$data =json_decode(file_get_contents("php://input"));
 
-$usuario->usuario=$data->login;
-$usuario->contrasena=$data->clave;
+if($_SERVER['REQUEST_METHOD']==="POST")
+{
+  $data =json_decode(file_get_contents("php://input"));
+
+    $usuario->usuario=$data->Usuario;
+    $usuario->contrasena=$data->Contrasena;
 
 if($usuario->login()->rowCount() > 0)
 {
-    echo "true";
+    
     $row=$usuario->login()->fetch(PDO::FETCH_ASSOC);
-
-    session_start();
-	$_SESSION['login']='true';
-	$_SESSION['nombre']=$row['nombre'];
-	$_SESSION['Id']=$row['Id'];
-	$_SESSION['foto']=$row['foto'];
-    $_SESSION['tipo_usuario']=$row['tipo_usuario'];
-    
-    $usuario_arr=array(
-    'Id'=>$row['Id'],
-    'nombre'=>$row['nombre'],
-    'direccion'=>$row['direccion'],
-    'identificacion'=>$row['identificacion'],
-    'telefono'=>$row['telefono'],
-    'correo'=>$row['correo'],
-    'usuario'=>$row['usuario'],
-    'tipo_usuario'=>$row['tipo_usuario'],
-    'estado'=>$row['estado'],
-    'sexo'=>$row['sexo']
-    
-);
-   
-
+    $iss="localhost";
+    $iat=time();
+    $nbf=$iat +10;
+    $exp=$iat +60;
+    $aud="user";
+    $user_arr_data=array(
+      "foto"=>$row["foto"],
+      "tipo"=>$row["tipo_usuario"],
+      "id"=>$row["Id"],
+      "name"=>$row["nombre"]
+     
+    );
+    $secret_key="owt125";
+    $payload=array(
+     "iss"=>$iss,
+     "iat"=>$iat,
+     "nbf"=>$nbf,
+     "exp"=>$exp,
+     "aud"=>$aud,
+     "data"=>$user_arr_data);
+     $jwt=JWT::encode($payload,$secret_key,'HS512');
+    $result=array(
+      "success"=>true,
+      "message"=>"Usuario autentificado",
+       "token"=>$jwt,
+       "foto"=>$row["foto"],
+       "tipo"=>$row["tipo_usuario"],
+       "id"=>$row["Id"],
+       "name"=>$row["nombre"]
+    );
+    echo   json_encode($result);
 }
 else
 {
-    echo "false";
+    $result=array(
+        "success"=>false,
+        "message"=>"Usuario o contraseña incorrecto",
+      );
+    echo   json_encode($result);
+}
 }
 
 
-//print_r(json_encode($usuario_arr));

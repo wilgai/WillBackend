@@ -16,27 +16,50 @@ $db =$database->connect();
 $factura = new Factura($db);
 //Get raw posted data
 $data =json_decode(file_get_contents("php://input"));
-
+$factura->Id=$data->Id;
 $factura->usuario_registro=$data->usuario_registro;
 $factura->codigoCliente=$data->codigoCliente;
 $factura->tipoDocumento=$data->tipoDocumento;
 $factura->ncf=$data->ncf;
-$factura->referencia=uniqid('F0012');
+$factura->referencia=$data->referencia;
 $factura->descuento=$data->descuento;
 $factura->detalle=$data->detalle;
 $factura->totaln=$data->totaln;
 $factura->itbistot=$data->itbistot;
 $factura->fecha=strftime( "%Y-%m-%d", time());
-$factura->arreglo=$data->arreglo;
+$factura->suplidor=$data->suplidor;
+$factura->OrderNumber=$data->OrderNumber;
+$factura->metPago=$data->metPago;
+$factura->DeletedOrderItemIDs=$data->DeletedOrderItemIDs;
+$result=$data->orderDet;
+$factura->orderDet=json_encode($result,true);
+
+//var_dump($factura->orderDet);
+
 // Create post
-if($factura->create()){
-    $factura->createDetails();
-}
-else{
-    echo json_encode(
-        array('message' => 'Hubo problema creando la factura')
-    );
-    
+if($_SERVER['REQUEST_METHOD'] != "OPTIONS")
+{
+    if($factura->Id ==0 || $factura->Id ==null) 
+    {
+        if($factura->create()){
+            echo json_encode(true);
+        }
+        else{
+            echo json_encode(false);
+            
+        }
+    } 
+    else
+    {
+        if($factura->update()){
+            echo json_encode(true);
+        }
+        else{
+            echo json_encode(false);
+            
+        }
+
+    }   
 }
 
 

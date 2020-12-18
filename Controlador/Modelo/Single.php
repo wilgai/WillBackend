@@ -6,6 +6,7 @@ header('Content-Type: application/json');
 include_once '../../config/Database.php';
 include_once '../../Modelo/modelo.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -26,7 +27,7 @@ $cat->read_single();
 //Create array
 $marca_arr=array(
     'Id'=>$marca->Id,
-    'nombre'=>$modelo->nombre
+    'nombre'=>$modelo->nombre,
     'marca'=>$modelo->marca
     
 );

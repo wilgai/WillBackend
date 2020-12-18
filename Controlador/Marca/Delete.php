@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/marca.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -25,8 +26,8 @@ $marca->Id=$data->Id;
 
 // Create post
 if($marca->delete()){
-    echo 'Se elimino la marca';
+    echo json_encode(1);
 }
 else{
-    echo 'No se pudo eliminar la marca';
+    echo json_encode(0);
 }

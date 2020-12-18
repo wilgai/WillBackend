@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/suplidor.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -24,8 +25,8 @@ $suplidor->Id=$data->Id;
 //$usuario->id=$_GET['id'];
 
 if($suplidor->delete()){
-    echo "Se elimino el suplidor";
+    echo json_encode(1);
 }
 else{
-   echo "No se pudo eliminar el usuario";
+    echo json_encode(0);
 }

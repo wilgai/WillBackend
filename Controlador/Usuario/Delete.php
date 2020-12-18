@@ -7,6 +7,19 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 
 include_once '../../config/Database.php';
 include_once '../../Modelo/usuario.php';
+session_start();
+if(!isset($_SESSION['token'])){
+    echo json_encode(404);
+    exit;
+  }
+  if(!isset($_COOKIE['token'])){
+    echo json_encode(404);
+    exit;
+  }
+  if($_SESSION['token'] != $_COOKIE['token']){
+    echo json_encode(404);
+    exit;
+  }
 
 //Instancaite DB & connect
 

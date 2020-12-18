@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/modelo.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -25,8 +26,8 @@ $modelo->Id=$data->Id;
 
 // Create post
 if($modelo->delete()){
-    echo 'Se elimino el modelo';
+    echo json_encode(1);
 }
 else{
-    echo 'No se pudo eliminar el modelo';
+    echo json_encode(0);
 }

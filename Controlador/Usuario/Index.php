@@ -6,6 +6,7 @@ header('Content-Type: application/json');
 include_once '../../config/Database.php';
 include_once '../../Modelo/usuario.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -44,6 +45,7 @@ if($num > 0)
          'contrasena'=>$contrasena,
          'estado'=>$estado,
          'sexo'=>$sexo,
+         'foto'=>$foto,
          
          
       );

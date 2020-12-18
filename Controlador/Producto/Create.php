@@ -38,34 +38,23 @@ $producto->porciento_beneficio=$data->porciento_beneficio;
 $producto->porciento_minimo=$data->porciento_minimo;
 $producto->modelo=$data->modelo;
 $producto->codigo=$data->Codigo;
+$producto->garantia=$data->garantia;
 
 //Check if email is alredy exist
 $name=$producto->CheckName()->rowCount();
 $code=$producto->CheckCode()->rowCount();
 if($name > 0)
 {
-    echo json_encode(
-        array('message' => 'Existe un producto con este nombre')
-    );
-}
-elseif($code > 0)
-{
-    echo json_encode(
-        array('message' => 'Este producto ya existe')
-    );
+    echo json_encode(10);
 }
 else 
 {
     // Create post
     if($producto->create()){
-        echo json_encode(
-            array('message' => 'Se registro el producto')
-        );
+        echo json_encode(1);
     }
     else{
-        echo json_encode(
-            array('message' => 'No se pudo registrar el producto')
-        );
+        echo json_encode(0);
     }
 }
 

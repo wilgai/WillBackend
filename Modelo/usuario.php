@@ -15,6 +15,7 @@ class Usuario{
     public $contrasena;
     public $estado;
     public $sexo;
+    public $foto;
 
 
     public function __construct($db){
@@ -120,6 +121,21 @@ class Usuario{
             return true;
         }*/
     }
+    public  function CheckUserName()
+    {
+        $query= ' SELECT *FROM '.$this->table . ' WHERE usuario=? ';
+        //Prepare statement
+        $stmt=$this->conn->prepare($query);
+        //Bind param
+        $stmt->bindParam(1, $this->usuario);
+        //Execute Statement
+        $stmt->execute();
+        return $stmt;
+        /*if($stmt->rowCount() > 0)
+        {
+            return true;
+        }*/
+    }
 
     public  function CheckIdentification()
     {
@@ -146,7 +162,8 @@ class Usuario{
         tipo_usuario = :tipo_usuario ,
         contrasena = :contrasena,
         estado = :estado ,
-        sexo = :sexo 
+        sexo = :sexo ,
+        foto = :foto 
         WHERE
         Id = :Id';
         $stmt=$this->conn->prepare($query);
@@ -162,6 +179,7 @@ class Usuario{
         $this->contrasena = htmlspecialchars(strip_tags($this->contrasena));
         $this->estado = htmlspecialchars(strip_tags($this->estado));
         $this->sexo = htmlspecialchars(strip_tags($this->sexo));
+        $this->foto = htmlspecialchars(strip_tags($this->foto));
         //Bind Data
         $stmt->bindParam(':Id', $this->Id);
         $stmt->bindParam(':nombre', $this->nombre);
@@ -174,6 +192,7 @@ class Usuario{
         $stmt->bindParam(':contrasena', $this->contrasena);
         $stmt->bindParam(':estado', $this->estado);
         $stmt->bindParam(':sexo', $this->sexo);
+        $stmt->bindParam(':foto', $this->foto);
         //Execute query
         $stmt->execute();
         if($stmt->execute()){

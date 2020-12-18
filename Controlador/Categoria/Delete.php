@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/categoria.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -25,8 +26,8 @@ $cat->Id=$data->Id;
 
 // Create post
 if($cat->delete()){
-    echo 'Se elimino la categoria';
+    echo json_encode(1);
 }
 else{
-    echo 'No se pudo eliminar la categoria';
+    echo json_encode(0);
 }

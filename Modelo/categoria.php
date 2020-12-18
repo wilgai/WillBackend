@@ -68,7 +68,7 @@ class Categoria{
         //Prepare statement
         $stmt=$this->conn->prepare($query);
         //Bind param
-        $stmt->bindParam(1, $this->identificacion);
+        $stmt->bindParam(1, $this->nombre);
         //Execute Statement
         $stmt->execute();
         return $stmt;

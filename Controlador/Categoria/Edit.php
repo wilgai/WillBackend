@@ -8,6 +8,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/Database.php';
 include_once '../../Modelo/categoria.php';
 
+
 //Instancaite DB & connect
 
 $database =new Database();
@@ -23,25 +24,19 @@ $nombre=$cat->CheckName()->rowCount();
 if($nombre > 1)
 {
     
-    echo json_encode(
-        array('message'=>'Esta categoria ya existe.')
-    );
+    echo json_encode(10);
 }
 else 
 {
     // Create post
     if($cat->update()){
         
-        echo json_encode(
-            array('message'=>'Se actualizo la categoria.')
-        );
+        echo json_encode(1);
         
     }
     else{
         
-        echo json_encode(
-            array('message'=>'No se pudo actualizar la categoria.')
-        );
+        echo json_encode(0);
     }
 }
 
