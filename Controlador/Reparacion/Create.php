@@ -6,45 +6,41 @@ header('Access-Control-Allow-Methods:POST ');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../../config/Database.php';
-include_once '../../Modelo/factura.php';
+include_once '../../Modelo/reparacion.php';
 
 //Instancaite DB & connect
 
 $database =new Database();
 $db =$database->connect();
 //Instanciate blog post object
-$factura = new Factura($db);
+$reparacion = new Reparacion($db);
 //Get raw posted data
 date_default_timezone_set('America/Santo_Domingo');
 $date = date('d-m-y H:i:A');
 $data =json_decode(file_get_contents("php://input"));
-$factura->Id=$data->Id;
-$factura->usuario_registro=$data->usuario_registro;
-$factura->codigoCliente=$data->codigoCliente;
-$factura->tipoDocumento=$data->tipoDocumento;
-$factura->ncf=$data->ncf;
-$factura->referencia=$data->referencia;
-$factura->descuento=$data->descuento;
-$factura->detalle=$data->detalle;
-$factura->totaln=$data->totaln;
-$factura->itbistot=$data->itbistot;
-$factura->fecha=$date;
-$factura->suplidor=$data->suplidor;
-$factura->OrderNumber=$data->OrderNumber;
-$factura->metPago=$data->metPago;
-$factura->DeletedOrderItemIDs=$data->DeletedOrderItemIDs;
-$result=$data->orderDet;
-$factura->orderDet=json_encode($result,true);
+$reparacion->Id=$data->Id;
+$reparacion->cliente=$data->cliente;
+$reparacion->detalle=$data->detalle;
+$reparacion->numero=$data->numero;
+$reparacion->total=$data->total;
+$reparacion->resgistradoPor=$data->resgistradoPor;
+$reparacion->fecha=$date;
+$reparacion->estado=$data->estado;
+$reparacion->metPago=$data->metPago;
+$reparacion->DeletedOrderItemIDs=$data->DeletedOrderItemIDs;
+$result=$data->repDet;
+$reparacion->repDet=json_encode($result,true);
 
 //var_dump($factura->orderDet);
 
 // Create post
 if($_SERVER['REQUEST_METHOD'] != "OPTIONS")
 {
-    if($factura->Id ==0 || $factura->Id ==null) 
+    if($reparacion->Id ==0 || $reparacion->Id ==null) 
     {
-        if($factura->create()){
+        if($reparacion->create()){
             echo json_encode(true);
+          
         }
         else{
             echo json_encode(false);
@@ -53,7 +49,7 @@ if($_SERVER['REQUEST_METHOD'] != "OPTIONS")
     } 
     else
     {
-        if($factura->update()){
+        if($reparacion->update()){
             echo json_encode(true);
         }
         else{

@@ -18,41 +18,42 @@ class Inventario{
     }
     public function read(){
         $query='SELECT
-         p.Id, 
-        p.nombre, 
-        p.codigo_suplidor, 
-        p.usuario_registro, 
-        p.fecha_registro, 
-        p.fecha_actualizacion,
-         p.tipo_impuesto, 
-         p.estado, 
-         p.codigo_categoria, 
-         p.referencia_interna, 
-         p.referencia_suplidor, 
-         p.foto, p.oferta, 
-         p.modificar_precio, 
-         p.acepta_descuento, 
-         p.detalle, 
-         p.codigo_marca, 
-         p.porciento_beneficio, 
-         p.porciento_minimo, 
-         p.modelo, p.Codigo, 
-         i.Id as IdInventario, 
-         i.IdProducto, 
-         i.PrecioCompra, 
-         i.Ganancia, 
-         i.PrecioVenta, 
-         i.Itbis, 
-         i.Cantidad, 
-         i.Fecha,
-         i.ref
-         FROM producto p 
-         INNER JOIN 
-         inventario i 
-         ON 
-         p.Id = i.IdProducto 
-         WHERE 
-          p.estado=1 ';
+        p.Id, 
+       p.nombre, 
+       p.nombre AS nombre2,
+       p.codigo_suplidor, 
+       p.usuario_registro, 
+       p.fecha_registro, 
+       p.fecha_actualizacion,
+        p.tipo_impuesto, 
+        p.estado, 
+        p.codigo_categoria, 
+        p.referencia_interna, 
+        p.referencia_suplidor, 
+        p.foto, p.oferta, 
+        p.modificar_precio, 
+        p.acepta_descuento, 
+        p.detalle, 
+        p.codigo_marca, 
+        p.porciento_beneficio, 
+        p.porciento_minimo, 
+        p.modelo, p.Codigo, 
+        i.Id as IdInventario, 
+        i.IdProducto, 
+        i.PrecioCompra, 
+        i.Ganancia, 
+        i.PrecioVenta, 
+        i.Itbis, 
+        i.Cantidad, 
+        i.Fecha,
+        i.ref
+        FROM producto p 
+        INNER JOIN 
+        inventario i 
+        ON 
+        p.Id = i.IdProducto 
+        WHERE 
+         p.estado=1 AND i.Cantidad >0 ';
         //Prepare statement
         $stmt=$this->conn->prepare($query);
         //Execute query

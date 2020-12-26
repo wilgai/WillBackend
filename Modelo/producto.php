@@ -121,6 +121,7 @@ class Producto{
                 SELECT
                 p.Id,
                 p.nombre,
+                p.nombre AS nombre2,
                 p.codigo_suplidor,
                 p.usuario_registro,
                 p.fecha_registro,

@@ -36,6 +36,7 @@ if($num > 0)
       $inventarios_item = array(
          'Id'=>$Id,
          'nombre'=>$nombre,
+         'nombre2'=>$nombre2,
          'codigo_suplidor'=>$codigo_suplidor,
          'usuario_registro'=>$usuario_registro,
          'fecha_registro'=>$fecha_registro,
